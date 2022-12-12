@@ -4,24 +4,25 @@ model The_Flying_Gull
   inner Modelica.Mechanics.MultiBody.World world(
     gravityType=Modelica.Mechanics.MultiBody.Types.GravityTypes.UniformGravity,
     g=Modelica.Constants.g_n,
-    n={0,-1,0})
+    n={0,1,0})
     annotation (Placement(transformation(extent={{-160,0},{-140,20}})));
 
   Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(n={0,1,0})
     annotation (Placement(transformation(extent={{-100,2},{-80,22}})));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r={0.3,
-        1.5,-1/3 - 0.04})
+        1.5,-1/3 - 0.04}, color={210,105,30})
     annotation (Placement(transformation(extent={{-92,120},{-50,162}})));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation1(r={0.3,
-        1.5,1/3 + 0.04})
+        1.5,1/3 + 0.04}, color={210,105,30})
     annotation (Placement(transformation(extent={{-118,-138},{-70,-90}})));
-  Modelica.Mechanics.MultiBody.Joints.SphericalSpherical sphericalSpherical(rodLength
-      =1.5)  annotation (Placement(transformation(extent={{-22,128},{8,158}})));
+  Modelica.Mechanics.MultiBody.Joints.SphericalSpherical sphericalSpherical(rodLength=
+       1.5, rodColor={255,128,0})
+             annotation (Placement(transformation(extent={{-22,128},{8,158}})));
   Modelica.Mechanics.MultiBody.Joints.SphericalSpherical sphericalSpherical1(
-      rodLength=1.5)
+      rodLength=1.5, rodColor={255,128,0})
     annotation (Placement(transformation(extent={{-22,-124},{-2,-104}})));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r={0,0,
-        1/3})
+        1/3}, color={0,128,0})
     annotation (Placement(transformation(extent={{68,124},{100,156}})));
   Modelica.Mechanics.MultiBody.Parts.BodyBox bodyBox(
     r={0,0,-1},
@@ -42,19 +43,25 @@ model The_Flying_Gull
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder bodyCylinder(
     r={0.6,0,0},
     length=1,
-    diameter=0.1,
+    diameter=0.08,
     density=1000*(200e3/1e6))
-    annotation (Placement(transformation(extent={{-18,-4},{14,28}})));
+    annotation (Placement(transformation(extent={{-18,-2},{14,30}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute(n={0,1,0})
     annotation (Placement(transformation(extent={{54,80},{74,100}})));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute1(n={0,1,0})
-    annotation (Placement(transformation(extent={{42,-58},{62,-38}})));
+    annotation (Placement(transformation(extent={{48,-60},{72,-36}})));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation5(r={0,0,
-        -1/3})
+        -1/3}, color={210,105,30})
     annotation (Placement(transformation(extent={{50,-138},{94,-94}})));
-  Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation(r={0.3,0,0.04})
+  Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation(r={0.3,0,0.04},
+    rotationType=Modelica.Mechanics.MultiBody.Types.RotationTypes.PlanarRotationSequence,
+
+    angles={90,0,90})
     annotation (Placement(transformation(extent={{-32,-64},{0,-32}})));
-  Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation1(r={0.3,0,-0.04})
+  Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation1(r={0.3,0,-0.04},
+    rotationType=Modelica.Mechanics.MultiBody.Types.RotationTypes.PlanarRotationSequence,
+
+    angles={-90,0,90})
     annotation (Placement(transformation(extent={{-30,74},{4,108}})));
 equation
   connect(world.frame_b, prismatic.frame_a) annotation (Line(
@@ -80,11 +87,11 @@ equation
       color={95,95,95},
       thickness=0.5));
   connect(fixedTranslation5.frame_b, revolute1.frame_b) annotation (Line(
-      points={{94,-116},{104,-116},{104,-48},{62,-48}},
+      points={{94,-116},{100,-116},{100,-48},{72,-48}},
       color={95,95,95},
       thickness=0.5));
   connect(bodyCylinder.frame_a, prismatic.frame_b) annotation (Line(
-      points={{-18,12},{-80,12}},
+      points={{-18,14},{-50,14},{-50,12},{-80,12}},
       color={95,95,95},
       thickness=0.5));
   connect(fixedRotation.frame_a, prismatic.frame_b) annotation (Line(
@@ -96,7 +103,7 @@ equation
       color={95,95,95},
       thickness=0.5));
   connect(fixedRotation.frame_b, revolute1.frame_a) annotation (Line(
-      points={{-8.88178e-16,-48},{42,-48}},
+      points={{-8.88178e-16,-48},{48,-48}},
       color={95,95,95},
       thickness=0.5));
   connect(fixedRotation1.frame_b, revolute.frame_a) annotation (Line(
@@ -118,7 +125,7 @@ equation
       color={95,95,95},
       thickness=0.5));
   connect(bodyBox1.frame_a, revolute1.frame_b) annotation (Line(
-      points={{110,-3},{116,-3},{116,-48},{62,-48}},
+      points={{110,-3},{116,-3},{116,-48},{72,-48}},
       color={95,95,95},
       thickness=0.5));
   connect(bodyBox.frame_a, revolute.frame_b) annotation (Line(
